@@ -87,6 +87,8 @@ public class AnnotationTest {
         excelExportFactory.setTarget(UserInfo.class);
         excelExportFactory.setTitle("ceshi");
         excelExportFactory.setResult(list);
+        int[] a={1};
+        excelExportFactory.setRemove(true,a);
         excelExportFactory.ExcelExport();
 
 

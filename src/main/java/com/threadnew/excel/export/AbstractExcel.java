@@ -15,7 +15,8 @@ import java.util.List;
  * @Version: 1.0
  */
 public abstract class AbstractExcel implements ExcelExport {
-    //
-    protected abstract void startup();
+    //初始化
+    protected abstract void initialize ();
+    //结束
     protected abstract void close(OutputStream out);
 }

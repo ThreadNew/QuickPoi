@@ -1,6 +1,7 @@
 package com.threadnew.excel.factory;
 
 import com.threadnew.excel.ExcelExport;
+import com.threadnew.excel.RemoveMarks;
 import com.threadnew.excel.RowDefinition;
 import com.threadnew.excel.cache.DefinitionMapCache;
 import com.threadnew.excel.parser.RowParser;
@@ -22,7 +23,30 @@ public class ExcelExportFactory {
     private List result;
     private String title;
     private Class target;
-    private Object lock="";
+    private Object lock = "";
+    private boolean remove = false;
+    private int[] rmvGroup = {0};
+    private RemoveMarks removeMarks;
+
+    public ExcelExportFactory() {
+        this.removeMarks = new RemoveMarks(remove, rmvGroup);
+
+    }
+
+    public ExcelExportFactory(ExcelExport excelExport, OutputStream out, List result, String title, Class target, boolean remove, int[] rmvGroup) {
+        this.excelExport = excelExport;
+        this.out = out;
+        this.result = result;
+        this.title = title;
+        this.target = target;
+        this.removeMarks = new RemoveMarks(remove, rmvGroup);
+
+    }
+
+    public void setRemove(boolean remove, int[] rmvGroup) {
+        this.removeMarks = new RemoveMarks(remove, rmvGroup);
+    }
+
 
     public ExcelExport getExcelExport() {
         return excelExport;
@@ -66,10 +90,11 @@ public class ExcelExportFactory {
 
     //模板方法
     public void ExcelExport() {
+        this.excelExport.setRemoveMarks(this.removeMarks);
         //缓存中得到
         RowDefinition single = getSingle(target.getName());
         try {
-            excelExport.excelExport(out,result,target,title,single);
+            excelExport.excelExport(out, result, target, title, single);
         } catch (Exception e) {
             e.printStackTrace();
         }

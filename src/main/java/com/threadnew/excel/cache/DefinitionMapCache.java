@@ -2,6 +2,7 @@ package com.threadnew.excel.cache;
 
 import com.threadnew.excel.RowDefinition;
 import com.threadnew.excel.exception.ExcelExportException;
+import org.apache.log4j.Logger;
 
 
 import java.util.Map;
@@ -18,6 +19,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Version: 1.0
  */
 public class DefinitionMapCache {
+    private static Logger log=Logger.getLogger(DefinitionMapCache.class);
     private static final Map<String, RowDefinition> definitionMap = new ConcurrentHashMap<String, RowDefinition>();
 
     public static void putDefinitionMap(String name, RowDefinition rowDefinition) {
@@ -26,14 +28,8 @@ public class DefinitionMapCache {
             if (rowDefinition == null) {
                 definitionMap.put(name, rowDefinition);
             }
-        } else {
-
-            try {
-                throw new ExcelExportException("this name is null and '' ");
-            } catch (ExcelExportException e) {
-                e.printStackTrace();
-            }
-
+        }else{
+           log.info("name is null or name is ''");
         }
     }
 

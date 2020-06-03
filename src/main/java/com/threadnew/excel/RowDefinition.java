@@ -21,12 +21,13 @@ public class RowDefinition {
     public List<CellDefinition> getCellDefinitions() {
         return cellDefinitions;
     }
+
     //找出最大的列数
-    public int maxCellNum(){
+    public int maxCellNum() {
         //
-        int max=0;
-        for(CellDefinition cel:cellDefinitions){
-            if(max<=cel.getCellNum()) max=cel.getCellNum();
+        int max = 0;
+        for (CellDefinition cel : cellDefinitions) {
+            if (max <= cel.getCellNum()) max = cel.getCellNum();
         }
         return max;
     }

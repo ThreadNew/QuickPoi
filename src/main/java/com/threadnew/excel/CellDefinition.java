@@ -2,6 +2,8 @@ package com.threadnew.excel;
 
 import com.threadnew.excel.annotation.CellType;
 
+import java.util.Arrays;
+
 /**
  * @Package: com.threadnew.excel
  * @ClassName: CellDefinition
@@ -18,11 +20,13 @@ public class CellDefinition {
     private CellType cellType;
     private String dateFormat;
     private boolean dateType = false;
+    private boolean remove = false;
+    private int[] rmvGroup = {0};
 
     public CellDefinition() {
     }
 
-    public CellDefinition(String name, String title, int cellNum, int cellWidth,  CellType cellType, String dateFormat, boolean dateType) {
+    public CellDefinition(String name, String title, int cellNum, int cellWidth, CellType cellType, String dateFormat, boolean dateType) {
         this.name = name;
         this.title = title;
         this.cellNum = cellNum;
@@ -30,6 +34,18 @@ public class CellDefinition {
         this.cellType = cellType;
         this.dateFormat = dateFormat;
         this.dateType = dateType;
+    }
+
+    public CellDefinition(String name, String title, int cellNum, int cellWidth, CellType cellType, String dateFormat, boolean dateType, boolean remove, int[] rmvGroup) {
+        this.name = name;
+        this.title = title;
+        this.cellNum = cellNum;
+        this.cellWidth = cellWidth;
+        this.cellType = cellType;
+        this.dateFormat = dateFormat;
+        this.dateType = dateType;
+        this.remove = remove;
+        this.rmvGroup = rmvGroup;
     }
 
     public boolean isDateType() {
@@ -88,6 +104,22 @@ public class CellDefinition {
         this.dateFormat = dateFormat;
     }
 
+    public void setRemove(boolean remove) {
+        this.remove = remove;
+    }
+
+    public boolean getRmove() {
+        return this.remove;
+    }
+
+    public int[] getRmvGroup() {
+        return rmvGroup;
+    }
+
+    public void setRmvGroup(int[] rmvGroup) {
+        this.rmvGroup = rmvGroup;
+    }
+
     @Override
     public String toString() {
         return "CellDefinition{" +
@@ -97,6 +129,9 @@ public class CellDefinition {
                 ", cellWidth=" + cellWidth +
                 ", cellType=" + cellType +
                 ", dateFormat='" + dateFormat + '\'' +
+                ", dateType=" + dateType +
+                ", remove=" + remove +
+                ", rmvGroup=" + Arrays.toString(rmvGroup) +
                 '}';
     }
 }

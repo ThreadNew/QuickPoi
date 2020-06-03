@@ -28,7 +28,7 @@ public class RowParser {
         this.rowDefinition = rowDefinition;
     }
 
-     //利用Java反射解析
+    //利用Java反射解析
     public void parser() {
         //1 获取Class
         Class clazz = getTargetClass();
@@ -43,11 +43,20 @@ public class RowParser {
     }
 
     protected CellDefinition getForFiled(Field field) {
+        CellDefinition cellDefinition = null;
         ExcelRow excelRow = field.getAnnotation(ExcelRow.class);
         CellType cellType = excelRow.cellType();
         boolean isDateType = false;
         if (cellType == CellType.DateType) isDateType = true;
-        CellDefinition cellDefinition = new CellDefinition(excelRow.name(), excelRow.title(), excelRow.cellNum(), excelRow.cellWidth(), excelRow.cellType(), excelRow.dateFormat(), isDateType);
+        //判断是否剔除
+        boolean remove = excelRow.remove();
+        if (!remove) {
+            cellDefinition = new CellDefinition(field.getName(), excelRow.title(), excelRow.cellNum(), excelRow.cellWidth(), excelRow.cellType(), excelRow.dateFormat(), isDateType);
+
+        } else {
+            cellDefinition = new CellDefinition(field.getName(), excelRow.title(), excelRow.cellNum(), excelRow.cellWidth(), excelRow.cellType(), excelRow.dateFormat(), isDateType, remove, excelRow.rmvGroup());
+
+        }
         return cellDefinition;
 
     }

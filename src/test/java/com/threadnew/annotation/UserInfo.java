@@ -14,13 +14,13 @@ import java.util.Date;
  * @Version: 1.0
  */
 public class UserInfo {
-    @ExcelRow(name="name",title = "姓名",cellType = CellType.TextType,cellNum = 0)
+    @ExcelRow(title = "姓名",cellType = CellType.TextType,cellNum = 0,remove = true,rmvGroup = {1,2,3})
     private String name;
-    @ExcelRow(name="age",title = "年龄",cellType = CellType.TextType,cellNum = 1)
+    @ExcelRow(title = "年龄",cellType = CellType.TextType,cellNum = 1)
     private int age;
-    @ExcelRow(name="address",title = "地址",cellType = CellType.TextType,cellNum = 2)
+    @ExcelRow(title = "地址",cellType = CellType.TextType,cellNum = 2)
     private String address;
-    @ExcelRow(name="datetime",title = "日期",cellType = CellType.DateType,cellNum = 4,dateFormat = "yyyy-MM-dd")
+    @ExcelRow(title = "日期",cellType = CellType.DateType,cellNum = 4,dateFormat = "yyyy-MM-dd",remove = true,rmvGroup = {1})
     private Date datetime;
 
     public String getName() {
